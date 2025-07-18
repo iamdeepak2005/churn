@@ -1,128 +1,100 @@
-# 💼 Customer Churn Prediction System
+# 📊 Telecom Customer Churn Prediction
+
+This project demonstrates the complete process of building and deploying a machine learning model to predict customer churn in a telecom company.
+
+> ⚠️ Note: This project is for educational and internal demonstration purposes only.
 
 ---
 
-## 🧠 Project Objective
+## 🛠️ Project Components
 
-The primary goal of this project is to build a machine learning model that **predicts customer churn** — whether a customer will leave a telecom service or not — using structured data. The model is embedded into an interactive **Streamlit web application**.
+Below are the core files used in this implementation:
 
----
+📁 Project Directory
+├── app.py # Streamlit application
+├── pipeline.pkl # Fitted ColumnTransformer (preprocessing pipeline)
+├── model.pkl # Trained Logistic Regression model
+├── preprocessor.pkl # Preprocessing logic (if stored separately)
+├── WA_Fn-UseC_-Telco-Customer-Churn.csv # Raw dataset
+├── ChurnImplementation.ipynb # Jupyter notebook with model training steps
+├── README.md # This documentation
 
-## 📂 Folder Structure
-
-churn/
-│
-├── ChurnImplementation.ipynb ← Full EDA, preprocessing, model training
-├── WA_Fn-UseC_-Telco-Customer-Churn.csv ← Original dataset
-├── pipeline.pkl ← Serialized pipeline (preprocessor + model)
-├── model.pkl ← Trained model (Random Forest)
-├── preprocessor.pkl ← Serialized preprocessing pipeline
-├── app.py ← Streamlit frontend interface
-├── README.md ← This file
-
-yaml
+markdown
 Copy
 Edit
 
 ---
 
-## 📝 Dataset Information
+## 🧠 What this project does:
 
-- 📌 **Source**: IBM Watson Telco Customer Churn Dataset  
-- 📌 **Type**: Structured (CSV)  
-- 📌 **Target**: `Churn` (Yes/No)  
-- 📌 **Records**: ~7043  
-- 📌 **Features**:
-  - Demographics: `gender`, `SeniorCitizen`, `Partner`, `Dependents`
-  - Services: `PhoneService`, `InternetService`, `StreamingTV`, etc.
-  - Account Info: `tenure`, `Contract`, `PaymentMethod`, `MonthlyCharges`, etc.
+1. **Data Cleaning & Preprocessing**
+   - Handled missing values
+   - Categorical columns encoded via `OneHotEncoder`
+   - Numerical columns scaled using `StandardScaler`
+   - Combined using `ColumnTransformer`
 
----
+2. **Model Building**
+   - Used `LogisticRegression` from `scikit-learn`
+   - Trained on preprocessed dataset
+   - Serialized pipeline and model using `joblib`
 
-## ⚙️ Workflow Breakdown
+3. **Deployment**
+   - Built an interactive frontend using `Streamlit`
+   - Inputs taken via sidebar
+   - Predictions shown on main page
 
-### 🔹 Step 1: Data Cleaning & Transformation
-
-- Handled missing and erroneous entries in `TotalCharges`
-- Converted all categorical fields using **OneHotEncoding**
-- Applied **StandardScaler** to numerical columns
-
----
-
-### 🔹 Step 2: Model Building
-
-- Data split into `X_train`, `X_test`, `y_train`, `y_test`
-- Multiple algorithms tested:
-  - ✅ Random Forest (Best Performance)
-  - Logistic Regression
-  - Decision Tree
-
-- Best model saved using `joblib` as: `model.pkl`
+4. **Execution**
+   - Once you run the app, you will get a line like this:
+     ```
+     your url is: https://tasty-tigers-switch.loca.lt
+     ```
+   - Visit that URL in your browser
+   - ⚠️ Use the "External URL" (shown in terminal output) as your secret password for any optional gated inputs (if implemented)
 
 ---
 
-### 🔹 Step 3: Pipeline Integration
+## ▶️ How to Run the App
 
-- Built a full preprocessing + model pipeline:
-  - `ColumnTransformer` for column-wise preprocessing
-  - Wrapped with classifier using `Pipeline`
-  - Saved complete object to `pipeline.pkl` for inference
+1. Install required libraries:
+   ```bash
+   pip install streamlit pandas numpy scikit-learn joblib
+Run the Streamlit app:
 
----
-
-### 🔹 Step 4: Web Application (Streamlit)
-
-- Built a UI with:
-  - Select boxes & sliders for inputs
-  - Prediction on button click
-  - Clear result: **“Likely to Churn”** or **“Not Likely to Churn”**
-- Web app reads from `pipeline.pkl` and applies on user inputs
-
----
-
-## 🚀 How to Run the Project
-
-### 🧰 Step 1: Clone the Repository
-
-git clone https://github.com/iamdeepak2005/churn.git
-cd churn
-🧰 Step 2: Set up a Virtual Environment
-bash
-Copy
-Edit
-python -m venv .venv
-.\.venv\Scripts\activate        # Windows
-# source .venv/bin/activate    # Mac/Linux
-🧰 Step 3: Install Required Libraries
-Create a file requirements.txt or install manually:
-
-bash
-Copy
-Edit
-pip install streamlit scikit-learn pandas numpy matplotlib seaborn
-🧰 Step 4: Launch the Streamlit App
 bash
 Copy
 Edit
 streamlit run app.py
-🧾 Output Screenshot Example
-📸 When you run the app, you’ll see an interactive form with dropdowns, sliders, and a Predict button.
+Once it runs, note the following output (example):
 
-The prediction result will appear as:
+csharp
+Copy
+Edit
+Local URL: http://localhost:8501
+Network URL: http://192.168.1.3:8501
+External URL: http://34.80.9.43:8501
+your url is: https://tasty-tigers-switch.loca.lt
+Copy the your url into your browser to test the app remotely.
 
-✅ Not Likely to Churn
-or
-⚠️ Likely to Churn
+🧪 Sample Inputs
+When using the web interface, enter:
 
-🔮 Future Enhancements
-Add user authentication to app
+gender: Male / Female
 
-Deploy on cloud (Render / Heroku / AWS EC2)
+tenure: Numeric value (e.g., 5)
 
-Show SHAP-based model explanations
+contract type: Month-to-month, One year, Two year
 
-Include download option for prediction history
+monthly charges: e.g., 45.65
 
-👨‍💻 Author
-Name	GitHub
-Deepak B O	@iamdeepak2005
+etc...
+
+🧩 Author Notes
+This project includes obfuscation of certain logic in app.py to deter blind copy-pasting.
+
+Some outputs require decoding or understanding of how external URLs link to frontend routing behavior.
+
+All .pkl files are essential — do not delete or rename unless retraining the pipeline.
+
+📧 Contact
+If you're running this demo and have issues, reach out to the project maintainer.
+
