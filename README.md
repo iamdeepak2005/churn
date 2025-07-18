@@ -83,7 +83,7 @@ Edit
 ## 🚀 How to Run the Project
 
 ### 🧰 Step 1: Clone the Repository
-```bash
+
 git clone https://github.com/iamdeepak2005/churn.git
 cd churn
 🧰 Step 2: Set up a Virtual Environment
